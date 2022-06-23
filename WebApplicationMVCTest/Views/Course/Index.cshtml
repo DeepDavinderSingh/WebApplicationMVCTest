@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Course>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Manage Course</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Course" asp-action="AddCourse" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Add New Course</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped" style="width:100%">
+
+        <thead>
+            <tr>
+                <th class="col-2">ID</th>
+                <th class="col-4">Course Name</th>
+                <th class="col-4">Course Duration</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            
+            @foreach(var course in Model)
+            {
+                <tr>
+                    <td>
+                        @course.Id
+                    </td>
+                    <td>
+                        @course.courseName
+                    </td>
+                     <td>
+                        @course.courseDuration
+                    </td>
+                    <td>
+                       <div class="btn-group" role="group">
+                           <a asp-controller="Course" asp-action="EditCourse" asp-route-id="@course.Id" class="btn btn-primary mx-2">
+                           <i class="bi bi-pencil-square"></i>&nbsp;Edit</a>
+                       </div>
+                    </td>
+                    <td>
+                       <div class="btn-group" role="group">
+                           <a asp-controller="Course" asp-action="DeleteCourse" asp-route-id="@course.Id" class="btn btn-danger mx-2">
+                           <i class="bi bi-x-square"></i>&nbsp;Delete</a>
+                       </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

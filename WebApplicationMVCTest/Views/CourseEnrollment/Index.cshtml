@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Enrollment>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Enroll Student in Course</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="CourseEnrollment" asp-action="AddEnrollment" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> &nbsp; Enroll Student</a>
+        </div>
+
+    </div>
+
+
+    <table class="table table-bordered table-striped" style="width:100%">
+
+        <thead>
+            <tr>
+                <th class="col-1">Student Id</th>
+                <th class="col-3">Student Name</th>
+                <th class="col-1">Course Id</th>
+                <th class="col-3">Course Name</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>
+                       @item.StudentID
+                    </td>
+                    <td>
+                       @Html.DisplayFor(modelItem => item.Student.Name)
+                    </td>
+                    <td>
+                        @item.CourseID
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.courseName)
+                    </td>
+                    <td>
+                       <div class="btn-group" role="group">
+                           <a asp-controller="CourseEnrollment" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary mx-2">
+                           Details</a>
+                       </div>
+                    </td>
+                    <td>
+                       <div class="btn-group" role="group">
+                           <a asp-controller="CourseEnrollment" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2">
+                           <i class="bi bi-pencil-square"></i>&nbsp;Edit</a>
+                       </div>
+                    </td>
+                    <td>
+                       <div class="btn-group" role="group">
+                           <a asp-controller="CourseEnrollment" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2">
+                           <i class="bi bi-x-square"></i>&nbsp;Delete</a>
+                       </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>                 
